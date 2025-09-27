@@ -1,13 +1,13 @@
 // JSX - JavaScript XML -> HTML
 import { useQuery } from '@tanstack/react-query'
 
-import { Dialog } from './components/ui/dialog'
-import { CreateGoal } from './components/create-goal'
-import { Summary } from './components/summary'
-import { EmptyGoals } from './components/empty-goals'
-import { getSummary } from './http/get-summary'
+import { Dialog } from '../components/ui/dialog'
+import { CreateGoal } from '../components/create-goal'
+import { Summary } from '../components/summary'
+import { EmptyGoals } from '../components/empty-goals'
+import { getSummary } from '../http/get-summary'
 
-export function App() {
+export function Application() {
   const { data } = useQuery({
     queryKey: ['summary'],
     queryFn: getSummary,
