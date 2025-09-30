@@ -3,20 +3,24 @@ import { useQuery } from '@tanstack/react-query'
 
 import { Dialog } from '../components/ui/dialog'
 import { CreateGoal } from '../components/create-goal'
-import { Summary } from '../components/summary'
+import { WeeklySummary } from '../components/weekly-summary'
 import { EmptyGoals } from '../components/empty-goals'
-import { getSummary } from '../http/get-summary'
+import { useGetWeekSummary } from '../http/generated/api'
 
 export function Application() {
-  const { data } = useQuery({
-    queryKey: ['summary'],
-    queryFn: getSummary,
-    staleTime: 1000 * 60, // 60 seconds
-  })
+  const { data } = useGetWeekSummary()
+
+  if(isLoading || !data) {
+    return (
+      <div className='h-screen flex items-center justify-center'>
+        <Loader2 className='text-zinc-500 animate-spin size-10'/>
+      </div>
+    )
+  }
 
   return (
     <Dialog>
-      {data?.total && data.total > 0 ? <Summary /> : <EmptyGoals />}
+      {data.summary.total > 0 ? <WeeklySummary summary={data.summary} /> : <EmptyGoals />}
 
       <CreateGoal/>
     </Dialog>

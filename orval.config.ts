@@ -5,10 +5,20 @@ export default defineConfig({
     input: '../server/swagger.json',
     output: {
       baseUrl: 'http://localhost:3333',
-      target: './src/generated/api.ts',
+      target: './src/http/generated/api.ts',
       client: 'react-query',
       httpClient: 'fetch',
-      clean:true
+      clean:true,
+
+      override:{
+        fetch: {
+          includeHttpResponseReturnType: false
+        }
+        mutator: {
+          path: './src/http/client.ts',
+          name: 'http'
+        }
+      }
     }
   }
 })

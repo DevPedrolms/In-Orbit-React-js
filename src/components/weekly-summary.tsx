@@ -13,7 +13,7 @@ import { PendingGoals } from './pending-goals'
 
 dayjs.locale(ptBR)
 
-export function Summary() {
+export function WeeklySummary() {
   const { data } = useQuery({
     queryKey: ['summary'],
     queryFn: getSummary,
